@@ -29,7 +29,7 @@ class andyp_yoast_breadcrumbs {
      * @return void
      */
     public function create_shortcode(){
-         add_shortcode( 'yoast_breadcrumbs', array( $this, 'render_shortcode' ) );
+        add_shortcode( 'yoast_breadcrumbs', array( $this, 'render_shortcode' ) );
     }
 
     /**
@@ -41,6 +41,12 @@ class andyp_yoast_breadcrumbs {
      */
     public function render_shortcode($atts, $content = null){
 
+        // Use RankMath breadcrumbs
+        if( function_exists( 'rank_math_get_breadcrumbs' ) ) {
+            echo '<p id="breadcrumbs">'.rank_math_get_breadcrumbs() . '</p>';
+        }
+
+        // Use YOAST breadcrumbs
         if ( function_exists('yoast_breadcrumb') ) {
             yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
         }
